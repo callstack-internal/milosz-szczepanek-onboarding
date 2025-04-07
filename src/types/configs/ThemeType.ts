@@ -1,14 +1,15 @@
+import {FontsType} from './FontsType.ts';
+import {SizesType} from './SizesType.ts';
+
 export interface ThemeType {
   colors: {
     primary: string;
     accent: string;
     text: string;
     accentText: string;
+    grey: string;
+    white: string;
   };
-  sizes: {
-    '1x': number;
-    '2x': number;
-    '3x': number;
-    '4x': number;
-  };
+  sizes: SizesType;
+  fonts: FontsType;
 }

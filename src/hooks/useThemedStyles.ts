@@ -6,7 +6,7 @@ export const useThemedStyles = <T extends StyleSheet.NamedStyles<any>>(
   styles: (theme: any) => T,
 ) => {
   const theme = useTheme();
-  const themedStyles = useMemo(() => styles(theme), [theme]);
+  const themedStyles = useMemo(() => styles(theme), [theme, styles]);
 
   return StyleSheet.create(themedStyles);
 };
