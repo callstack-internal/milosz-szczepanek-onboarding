@@ -25,6 +25,6 @@ const themedStyles = createThemedStyles(theme => ({
     width: 50,
     height: 50,
     backgroundColor: theme.colors.accent,
-    borderRadius: '50%',
+    borderRadius: 25,
   },
 }));

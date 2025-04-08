@@ -25,6 +25,6 @@ const themedStyles = createThemedStyles(theme => ({
   container: {
     backgroundColor: theme.colors.accent,
     padding: theme.sizes['2x'],
-    borderRadius: 254,
+    borderRadius: 24,
   },
 }));
