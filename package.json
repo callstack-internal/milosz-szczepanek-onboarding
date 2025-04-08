@@ -13,7 +13,9 @@
     "setup": "yarn && bundle install && cd ios && bundle exec pod install && cd ..",
     "storybook-generate": "sb-rn-get-stories",
     "prepare": "husky",
-    "ci:test": "yarn lint && yarn typescript"
+    "ci:test": "yarn lint && yarn typescript",
+    "test:e2e": "maestro test -c __E2E__/baseFlow.yaml",
+    "setup:maestro": "brew tap mobile-dev-inc/tap && brew install maestro"
   },
   "dependencies": {
     "@react-navigation/native": "^7.1.5",

@@ -27,6 +27,7 @@ export const WeatherScreen = () => {
   const renderItem: ListRenderItem<WeatherDataType> = ({item}) => {
     return (
       <TouchableOpacity
+        testID={`weather-item-${item.name}`}
         onPress={() => navigation.navigate('WeatherDetailsScreen', {item})}>
         <BaseWeatherItem
           city={item.name}
