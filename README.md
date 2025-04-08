@@ -1,97 +1,80 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Hardcore Weather App
 
-# Getting Started
+> **Note**: Make sure you have completed
+> the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+Project is created with React Native CLI + TypeScript template.
 
-## Step 1: Start Metro
+**Weather Screen**
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Displays list cities where user can investigate weather. User is able to pull to refresh the
+list of cities.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+**Weather Details Screen**
 
-```sh
-# Using npm
-npm start
+User can investigate details of selected city weather.
 
-# OR using Yarn
+## Install and run the project
+
+1. Setup project
+
+```shell
+yarn setup
+```
+
+2. Start bundler
+
+```shell
 yarn start
 ```
 
-## Step 2: Build and run your app
+3. Run the app from Xcode and Android Studio or via terminal
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```shell
+ yarn android
 ```
 
-### iOS
+or
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
+```shell
+ yarn ios
 ```
 
-Then, and every time you update your native dependencies, run:
+## Scripts
 
-```sh
-bundle exec pod install
-```
+| Command              | Description                                                                     |
+|----------------------|---------------------------------------------------------------------------------|
+| `yarn start`         | Starts the Metro bundler.                                                       |
+| `yarn android`       | Builds the app for Android and runs it on a connected device or emulator.       |
+| `yarn ios`           | Builds the app for iOS and runs it on a connected device or simulator.          |
+| `yarn test`          | Runs the unit tests using Jest.                                                 |
+| `yarn lint`          | Runs ESLint to check for code style issues.                                     |
+| `yarn typescript`    | Runs TypeScript compiler to check for type errors.                              |
+| `yarn sanity`        | Runs a sanity check to ensure all the tests are on green.                       |
+| `yarn setup`         | Sets up the project by installing dependencies and configuring the environment. |
+| `yarn prepare`       | Prepares the project for Husky by installing Git hooks.                         |
+| `yarn ci:test`       | Runs the base linting and type checking for husky pre-push hook.                |
+| `yarn test:e2e`      | Runs end-to-end tests using Maestro.                                            |
+| `yarn setup:maestro` | Sets up the Maestro environment for end-to-end testing.                         |
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## Project structure
 
-```sh
-# Using npm
-npm run ios
+This project is structured in a flat way that allows for easy navigation and understanding of the codebase. The main
+directories are:
 
-# OR using Yarn
-yarn ios
-```
+- `.githooks`: Contains Git hooks for push checks.
+- `specs`: Contains the specs of native modules used in the project.
+- `husky`: Contains the configuration for Husky that handles pre-push hook.
+- `__E2E__`: Contains end-to-end tests for the app in Maestro.
+- `src`: Contains all the source code for the application.
+    - `components`: Reusable components used throughout the app.
+    - `configs`: Configuration files for the app, such as general styles, environment variables and api interceptors.
+    - `hooks`: Custom hooks for managing state and side effects.
+    - `navigation`: Navigation setup and configuration.
+    - `screens`: Contains the main screens of the app, such as WeatherScreen and WeatherDetailsScreen.
+    - `services`: API services for fetching data.
+    - `types`: TypeScript types and interfaces used in the app.
+    - `utils`: Utility functions used in the app.
+    
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+ 

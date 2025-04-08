@@ -1,5 +1,4 @@
-import {axiosWeatherInstance} from '@utils';
-import {constants} from '@configs';
+import {constants, axiosWeatherInstance} from '@configs';
 import {WeatherDataResponseType} from '@types';
 
 export class WeatherService {

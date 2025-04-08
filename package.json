@@ -11,7 +11,6 @@
     "typescript": "tsc --skipLibCheck --noEmit",
     "sanity": "yarn typescript && yarn lint && yarn test",
     "setup": "yarn && bundle install && cd ios && bundle exec pod install && cd ..",
-    "storybook-generate": "sb-rn-get-stories",
     "prepare": "husky",
     "ci:test": "yarn lint && yarn typescript",
     "test:e2e": "maestro test -c __E2E__/baseFlow.yaml",
