@@ -1,3 +1,8 @@
+jest.mock('react-native-config', () => ({
+  default: {
+    OPEN_WEATHER_API_KEY: 'mock_api_key',
+  },
+}));
 jest.mock('react-native-keyboard-controller', () =>
   require('react-native-keyboard-controller/jest'),
 );

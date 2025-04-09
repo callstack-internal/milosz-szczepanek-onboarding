@@ -74,7 +74,7 @@ export const WeatherScreen = () => {
       <FlatList
         data={filteredWeatherData || data}
         renderItem={renderItem}
-        ListHeaderComponent={UserLocationWeatherDetails}
+        ListHeaderComponent={searchText ? null : <UserLocationWeatherDetails />}
         ListEmptyComponent={renderListEmptyComponent}
         refreshControl={
           <RefreshControl refreshing={isRefetching} onRefresh={refetch} />

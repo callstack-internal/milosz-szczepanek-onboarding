@@ -1,5 +1,7 @@
+import Config from 'react-native-config';
+
 export const constants = {
-  WEATHER_API_KEY: 'e0af8c634791a1a95601d60307796cd7',
+  WEATHER_API_KEY: Config.OPEN_WEATHER_API_KEY,
   weatherAppCityIds: [
     703448, // Kyiv, UA
     692194, // Sumy, UA

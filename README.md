@@ -5,16 +5,24 @@
 
 Project is created with React Native CLI + TypeScript template.
 
+## Features
+
 **Weather Screen**
 
 Displays list cities where user can investigate weather. User is able to pull to refresh the
-list of cities.
+list of cities and the list header utilize the native location service to get the current location of the user
+and display the weather for that location.
 
 **Weather Details Screen**
 
 User can investigate details of selected city weather.
 
 ## Install and run the project
+
+Remember that before running the project you have to put your Open Weather API key in the `.env` file.
+
+You have to create an account on [Open Weather](https://openweathermap.org/) and generate an API key from
+here: https://home.openweathermap.org/api_keys
 
 1. Setup project
 
