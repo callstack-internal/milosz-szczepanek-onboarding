@@ -21,6 +21,7 @@ import {
 } from '@hooks';
 import {createThemedStyles} from '@utils';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
+import {UserLocationWeatherDetails} from '../../components/UserLocationWeatherDetails.tsx';
 
 export const WeatherScreen = () => {
   const styles = useThemedStyles(themedStyles);
@@ -70,6 +71,7 @@ export const WeatherScreen = () => {
       <FlatList
         data={filteredWeatherData || data}
         renderItem={renderItem}
+        ListHeaderComponent={UserLocationWeatherDetails}
         ListEmptyComponent={renderListEmptyComponent}
         refreshControl={
           <RefreshControl refreshing={isRefetching} onRefresh={refetch} />

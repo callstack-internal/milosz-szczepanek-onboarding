@@ -4,11 +4,7 @@ import {useEffect} from 'react';
 import Toast from 'react-native-toast-message';
 
 export const useGetWeatherData = () => {
-  const {
-    data: responseData,
-    isError,
-    ...queryOptions
-  } = useQuery({
+  const {data, isError, ...queryOptions} = useQuery({
     queryKey: ['weatherData'],
     queryFn: WeatherService.getWeatherData,
   });
@@ -24,7 +20,7 @@ export const useGetWeatherData = () => {
   }, [isError]);
 
   return {
-    data: responseData?.data?.list,
+    data: data?.list,
     ...queryOptions,
   };
 };

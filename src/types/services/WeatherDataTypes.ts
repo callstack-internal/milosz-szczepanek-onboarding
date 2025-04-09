@@ -39,7 +39,5 @@ export type WeatherDataType = {
 };
 
 export type WeatherDataResponseType = {
-  data: {
-    list: WeatherDataType[];
-  };
+  list: WeatherDataType[];
 };

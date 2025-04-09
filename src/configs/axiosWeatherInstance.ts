@@ -18,4 +18,11 @@ axiosWeatherInstance.interceptors.request.use(
   },
 );
 
+axiosWeatherInstance.interceptors.response.use(
+  response => response.data, // Return only the `data` object
+  error => {
+    return Promise.reject(error);
+  },
+);
+
 export {axiosWeatherInstance};

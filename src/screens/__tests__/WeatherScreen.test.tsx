@@ -5,9 +5,19 @@ import {WeatherScreen} from '@screens';
 import {AppProviders} from '@components';
 import {weatherMockData} from '@mocks';
 
+jest.mock('@hooks', () => ({
+  ...jest.requireActual('@hooks'),
+  useGetCurrentLocationWeatherData: jest.fn(() => ({
+    data: null,
+  })),
+}));
+
 const server = setupServer(
-  http.get('https://api.openweathermap.org/data/2.5/*', () => {
+  http.get('https://api.openweathermap.org/data/2.5/group', () => {
     return HttpResponse.json(weatherMockData);
+  }),
+  http.get('https://api.openweathermap.org/data/2.5/weather', () => {
+    return HttpResponse.json(weatherMockData.list[1]);
   }),
 );
 
@@ -27,9 +37,12 @@ describe('screen: WeatherScreen', () => {
     });
   });
 
-  it('should display error message when API fails', async () => {
+  it('should display error message when API fails and current user location should not be visible', async () => {
     server.use(
-      http.get('https://api.openweathermap.org/data/2.5/*', () => {
+      http.get('https://api.openweathermap.org/data/2.5/group', () => {
+        return HttpResponse.json({status: 500});
+      }),
+      http.get('https://api.openweathermap.org/data/2.5/weather', () => {
         return HttpResponse.json({status: 500});
       }),
     );
@@ -47,5 +60,8 @@ describe('screen: WeatherScreen', () => {
         ),
       ).toBeTruthy();
     });
+    expect(
+      screen.queryByTestId('user-location-weather-details'),
+    ).not.toBeVisible();
   });
 });

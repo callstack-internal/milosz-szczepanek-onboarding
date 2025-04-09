@@ -75,6 +75,7 @@ directories are:
     - `services`: API services for fetching data.
     - `types`: TypeScript types and interfaces used in the app.
     - `utils`: Utility functions used in the app.
+    - `mocks`: Mock data and functions used for testing purposes.
     
 
  
