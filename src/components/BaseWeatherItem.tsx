@@ -40,7 +40,7 @@ export const BaseWeatherItem: React.FC<PropsType> = ({
       <View style={styles.temperatureDetails}>
         <TemperatureDetails temperature={temperature} />
         {displayNavigationArrow ? (
-          <RightArrow testID="BaseWeatherItemTestID" />
+          <RightArrow testID="base-weather-item" />
         ) : null}
       </View>
     </View>

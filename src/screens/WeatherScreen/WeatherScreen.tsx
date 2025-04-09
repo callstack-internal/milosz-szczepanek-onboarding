@@ -22,8 +22,11 @@ import {
 import {createThemedStyles} from '@utils';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
 import {UserLocationWeatherDetails} from '../../components/UserLocationWeatherDetails.tsx';
+import {useTranslation} from 'react-i18next';
+import {i18n} from '@configs';
 
 export const WeatherScreen = () => {
+  const {t} = useTranslation();
   const styles = useThemedStyles(themedStyles);
   const navigation = useMainNavigation();
   const {data, isLoading, refetch, isRefetching, isLoadingError} =
@@ -52,18 +55,18 @@ export const WeatherScreen = () => {
 
   const renderListEmptyComponent = () => {
     if (filteredWeatherData && !isLoadingError) {
-      return <DataNotAvailable message="No results found" />;
+      return <DataNotAvailable message={t('general:noResults')} />;
     }
 
     return (
-      <DataNotAvailable message="Unfortunately service is currently not available. Please pull to refresh" />
+      <DataNotAvailable message={t('general:serviceUnavailableWithRefresh')} />
     );
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <AppInput
-        placeholder="Search city..."
+        placeholder={t('weatherScreen:searchCity')}
         value={searchText}
         onChangeText={setSearchText}
       />
@@ -90,5 +93,5 @@ const themedStyles = createThemedStyles(theme => ({
 }));
 
 export const weatherScreenOptions: NativeStackNavigationOptions = {
-  title: 'Weather',
+  title: i18n.t('weatherScreen:weather'),
 };

@@ -4,8 +4,11 @@ import {BaseWeatherItem, DataNotAvailable, WeatherDetails} from '@components';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {useMainStackRoute, useThemedStyles} from '@hooks';
 import {createThemedStyles} from '@utils';
+import {useTranslation} from 'react-i18next';
+import {i18n} from '@configs';
 
 export const WeatherDetailsScreen = () => {
+  const {t} = useTranslation();
   const styles = useThemedStyles(themedStyles);
   const {params} = useMainStackRoute();
 
@@ -23,19 +26,19 @@ export const WeatherDetailsScreen = () => {
         displayNavigationArrow={false}
       />
       <WeatherDetails
-        title="Humidity"
+        title={t('weatherDetailsScreen:humidity')}
         value={`${params.item.main.humidity} %`}
       />
       <WeatherDetails
-        title="Pressure"
+        title={t('weatherDetailsScreen:pressure')}
         value={`${params.item.main.pressure} hPa`}
       />
       <WeatherDetails
-        title="Wind Speed"
+        title={t('weatherDetailsScreen:windSpeed')}
         value={`${params.item.wind.speed} mph`}
       />
       <WeatherDetails
-        title="Cloud Cover"
+        title={t('weatherDetailsScreen:cloudCover')}
         value={`${params.item.clouds.all} %`}
       />
     </View>
@@ -50,5 +53,5 @@ const themedStyles = createThemedStyles(theme => ({
 }));
 
 export const weatherDetailsScreenOptions: NativeStackNavigationOptions = {
-  title: 'Details',
+  title: i18n.t('weatherDetailsScreen:details'),
 };

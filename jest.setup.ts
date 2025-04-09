@@ -15,3 +15,14 @@ jest.mock('./specs/NativeLocationService', () => ({
     ),
   ),
 }));
+
+jest.mock('react-native-localize', () => ({
+  getLocales: () => [
+    {
+      countryCode: 'US',
+      languageTag: 'en-US',
+      languageCode: 'en',
+      isRTL: false,
+    },
+  ],
+}));

@@ -21,12 +21,12 @@ describe('component: BaseWeatherItem', () => {
   it('renders navigation arrow by default', () => {
     render(<BaseWeatherItem {...baseProps} />);
 
-    expect(screen.getByTestId('BaseWeatherItemTestID')).toBeTruthy();
+    expect(screen.getByTestId('base-weather-item')).toBeTruthy();
   });
 
   it('does not render navigation arrow when displayNavigationArrow is false', () => {
     render(<BaseWeatherItem {...baseProps} displayNavigationArrow={false} />);
 
-    expect(screen.queryByTestId('BaseWeatherItemTestID')).toBeNull();
+    expect(screen.queryByTestId('base-weather-item')).toBeNull();
   });
 });
