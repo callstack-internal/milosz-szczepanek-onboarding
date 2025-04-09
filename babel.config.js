@@ -14,8 +14,10 @@ module.exports = {
           '@utils': './src/utils',
           '@services': './src/services',
           '@components': './src/components',
+          '@mocks': './src/mocks',
         },
       },
     ],
+    'react-native-reanimated/plugin',
   ],
 };

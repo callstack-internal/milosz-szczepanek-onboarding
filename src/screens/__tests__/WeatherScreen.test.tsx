@@ -1,9 +1,9 @@
 import {setupServer} from 'msw/node';
 import {http, HttpResponse} from 'msw';
-import {weatherMockData} from './weatherMockData.ts';
 import {render, screen, waitFor} from '@testing-library/react-native';
 import {WeatherScreen} from '@screens';
 import {AppProviders} from '@components';
+import {weatherMockData} from '@mocks';
 
 const server = setupServer(
   http.get('https://api.openweathermap.org/data/2.5/*', () => {

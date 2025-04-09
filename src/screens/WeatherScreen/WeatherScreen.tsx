@@ -2,23 +2,33 @@ import {
   FlatList,
   ListRenderItem,
   RefreshControl,
+  SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {useGetWeatherData} from './WeatherScreen.helpers.ts';
 import {
   AppActivityIndicator,
+  AppInput,
   BaseWeatherItem,
   DataNotAvailable,
 } from '@components';
 import {WeatherDataType} from '@types';
-import {useMainNavigation, useThemedStyles} from '@hooks';
+import {
+  useGetWeatherData,
+  useMainNavigation,
+  useSearchWeatherData,
+  useThemedStyles,
+} from '@hooks';
 import {createThemedStyles} from '@utils';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
 
 export const WeatherScreen = () => {
   const styles = useThemedStyles(themedStyles);
   const navigation = useMainNavigation();
-  const {data, isLoading, refetch, isRefetching} = useGetWeatherData();
+  const {data, isLoading, refetch, isRefetching, isLoadingError} =
+    useGetWeatherData();
+  const {searchText, setSearchText, filteredWeatherData} =
+    useSearchWeatherData(data);
 
   if (isLoading) {
     return <AppActivityIndicator />;
@@ -39,24 +49,41 @@ export const WeatherScreen = () => {
     );
   };
 
+  const renderListEmptyComponent = () => {
+    if (filteredWeatherData && !isLoadingError) {
+      return <DataNotAvailable message="No results found" />;
+    }
+
+    return (
+      <DataNotAvailable message="Unfortunately service is currently not available. Please pull to refresh" />
+    );
+  };
+
   return (
-    <FlatList
-      style={styles.container}
-      data={data}
-      renderItem={renderItem}
-      ListEmptyComponent={
-        <DataNotAvailable message="Unfortunately service is currently not available. Please pull to refresh" />
-      }
-      refreshControl={
-        <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-      }
-    />
+    <SafeAreaView style={styles.container}>
+      <AppInput
+        placeholder="Search city..."
+        value={searchText}
+        onChangeText={setSearchText}
+      />
+
+      <FlatList
+        data={filteredWeatherData || data}
+        renderItem={renderItem}
+        ListEmptyComponent={renderListEmptyComponent}
+        refreshControl={
+          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+        }
+        renderScrollComponent={props => <KeyboardAwareScrollView {...props} />}
+      />
+    </SafeAreaView>
   );
 };
 
 const themedStyles = createThemedStyles(theme => ({
   container: {
     backgroundColor: theme.colors.primary,
+    flex: 1,
   },
 }));
 
