@@ -1,86 +1,46 @@
-import {
-  FlatList,
-  ListRenderItem,
-  RefreshControl,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {Button, SafeAreaView} from 'react-native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
-import {
-  AppActivityIndicator,
-  AppInput,
-  BaseWeatherItem,
-  DataNotAvailable,
-} from '@components';
-import {WeatherDataType} from '@types';
-import {
-  useGetWeatherData,
-  useMainNavigation,
-  useSearchWeatherData,
-  useThemedStyles,
-} from '@hooks';
+
+import {useThemedStyles} from '@hooks';
 import {createThemedStyles} from '@utils';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-controller';
-import {UserLocationWeatherDetails} from '../../components/UserLocationWeatherDetails.tsx';
-import {useTranslation} from 'react-i18next';
 import {i18n} from '@configs';
+import {createWorkletRuntime, runOnRuntime} from 'react-native-reanimated';
+
+const workletRuntime = createWorkletRuntime('background');
 
 export const WeatherScreen = () => {
-  const {t} = useTranslation();
   const styles = useThemedStyles(themedStyles);
-  const navigation = useMainNavigation();
-  const {data, isLoading, refetch, isRefetching, isLoadingError} =
-    useGetWeatherData();
-  const {searchText, setSearchText, filteredWeatherData} =
-    useSearchWeatherData(data);
 
-  if (isLoading) {
-    return <AppActivityIndicator />;
-  }
-
-  const renderItem: ListRenderItem<WeatherDataType> = ({item}) => {
-    return (
-      <TouchableOpacity
-        testID={`weather-item-${item.name}`}
-        onPress={() => navigation.navigate('WeatherDetailsScreen', {item})}>
-        <BaseWeatherItem
-          city={item.name}
-          imageCode={item.weather[0].icon}
-          temperature={item.main.temp}
-          condition={item.weather[0].description}
-        />
-      </TouchableOpacity>
-    );
+  const calculatePrimes = (limit: number): number[] => {
+    'worklet';
+    const primes: number[] = [];
+    for (let i = 2; primes.length < limit; i++) {
+      let isPrime = true;
+      for (let j = 2; j * j <= i; j++) {
+        if (i % j === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) {
+        primes.push(i);
+      }
+    }
+    return primes;
   };
 
-  const renderListEmptyComponent = () => {
-    if (filteredWeatherData && !isLoadingError) {
-      return <DataNotAvailable message={t('general:noResults')} />;
-    }
-
-    return (
-      <DataNotAvailable message={t('general:serviceUnavailableWithRefresh')} />
-    );
+  const runOnSeparateThread = () => {
+    runOnRuntime(workletRuntime, () => {
+      'worklet';
+      console.log('Starting heavy calculation...');
+      const result = calculatePrimes(2400000); // Hardcore calculations so the thread is visible
+      console.log('Prime calculation completed. Total primes:', result.length);
+    })();
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <AppInput
-        placeholder={t('weatherScreen:searchCity')}
-        value={searchText}
-        onChangeText={setSearchText}
-      />
-
-      <FlatList
-        data={filteredWeatherData || data}
-        renderItem={renderItem}
-        ListHeaderComponent={searchText ? null : <UserLocationWeatherDetails />}
-        ListEmptyComponent={renderListEmptyComponent}
-        refreshControl={
-          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-        }
-        renderScrollComponent={props => <KeyboardAwareScrollView {...props} />}
-      />
+      <Button title="Run on separate thread" onPress={runOnSeparateThread} />
     </SafeAreaView>
   );
 };
